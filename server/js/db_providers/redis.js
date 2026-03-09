@@ -7,10 +7,33 @@ var cls = require("../lib/class"),
     bcrypt = require("bcrypt");
 
 module.exports = DatabaseHandler = cls.Class.extend({
-    init: function(config){
-        client = redis.createClient(config.redis_port, config.redis_host, {socket_nodelay: true});
-        client.auth(config.redis_password || "");
+    init: function(config) {
+        var self = this;
+        
+        // Construct the connection URL
+        // Format: redis[s]://[[username]:password@]host[:port][/db-number]
+        var redisUrl = "redis://default:" + (config.redis_password || "") + "@" + config.redis_host + ":" + config.redis_port;
+
+        client = redis.createClient({
+            url: redisUrl,
+            socket: {
+                noDelay: true
+            }
+        });
+
+        client.on('error', function(err) {
+            console.error('Redis Client Error:', err);
+        });
+
+        // In Redis v4+, we must explicitly call connect()
+        client.connect().then(function() {
+            log.info("Successfully connected to Redis at " + config.redis_host);
+        }).catch(function(err) {
+            console.error("Could not connect to Redis:", err);
+        });
     },
+    // ... keep all the rest of your code (loadPlayer, createPlayer, etc.) exactly the same
+    
     loadPlayer: function(player){
         var self = this;
         var userKey = "u:" + player.name;

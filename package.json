@@ -2,7 +2,7 @@
   "name": "BrowserQuest",
   "repository": {
     "type": "git",
-    "url": "https://github.com/browserquest/BrowserQuest.git"
+    "url": "https://github.com/UP404-BrowserQuest/Classic-BrowserQuest.git"
   },
   "version": "0.0.1",
   "dependencies": {
@@ -12,7 +12,7 @@
     "log": "~1.4.0",
     "memcache": "~0.3.0",
     "morgan": "^1.5.0",
-    "redis": ">=0",
+    "redis": "3.1.2",
     "requirejs": ">=2",
     "sanitizer": "~0.1.2",
     "semver": ">=0",
