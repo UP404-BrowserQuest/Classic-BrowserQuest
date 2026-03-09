@@ -51,12 +51,15 @@ define(['player', 'entityfactory', 'lib/bison'], function(Player, EntityFactory,
         },
 
         connect: function(dispatcherMode) {
-            var url = "ws://"+ this.host +":"+ this.port +"/",
-                self = this;
+    // Force the protocol to wss:// and remove the port for Render compatibility
+    var protocol = "wss://";
+    var url = protocol + this.host + "/";
+    var self = this;
 
-            log.info("Trying to connect to server : "+url);
-
-           this.connection = io(url, {forceNew: true, reconnection: false});// This sets the connection as a socket.io Socket.
+    log.info("Trying to connect to server : " + url);
+    
+    // We use port 443 for secure connections on Render
+    this.connection = io(url, {port: 443, forceNew: true, reconnection: false});// This sets the connection as a socket.io Socket.
 
             if(dispatcherMode) {
                 this.connection.on('message', function(e) {
