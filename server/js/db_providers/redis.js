@@ -8,29 +8,23 @@ var cls = require("../lib/class"),
 
 module.exports = DatabaseHandler = cls.Class.extend({
     init: function(config) {
-        var self = this;
-        
-        // Construct the connection URL
-        // Format: redis[s]://[[username]:password@]host[:port][/db-number]
-        var redisUrl = "redis://default:" + (config.redis_password || "") + "@" + config.redis_host + ":" + config.redis_port;
-
-        client = redis.createClient({
-            url: redisUrl,
-            socket: {
-                noDelay: true
-            }
+        // Version 3.1.2 style: No .connect() needed!
+        client = redis.createClient(config.redis_port, config.redis_host, {
+            socket_nodelay: true
         });
 
         client.on('error', function(err) {
-            console.error('Redis Client Error:', err);
+            console.error('Redis Error:', err);
         });
 
-        // In Redis v4+, we must explicitly call connect()
-        client.connect().then(function() {
-            log.info("Successfully connected to Redis at " + config.redis_host);
-        }).catch(function(err) {
-            console.error("Could not connect to Redis:", err);
+        client.on('connect', function() {
+            console.log('Successfully connected to Redis v3');
         });
+
+        // Only auth if there's a password (you said you don't have one)
+        if (config.redis_password && config.redis_password !== "") {
+            client.auth(config.redis_password);
+        }
     },
     // ... keep all the rest of your code (loadPlayer, createPlayer, etc.) exactly the same
     
