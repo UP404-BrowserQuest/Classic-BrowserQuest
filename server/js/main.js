@@ -41,7 +41,15 @@ function main(config) {
         }
     }, 1000);
 
-    log.info("Starting BrowserQuest game server...");
+   log.info("Starting BrowserQuest game server...");
+
+    // --- FIX STARTS HERE ---
+    // Force the config to use Render Environment Variables if they exist
+    config.redis_host = process.env.REDIS_HOST || config.redis_host;
+    config.redis_port = process.env.REDIS_PORT || config.redis_port;
+    config.redis_password = process.env.REDIS_PASSWORD || config.redis_password;
+    // --- FIX ENDS HERE ---
+
     var selector = DatabaseSelector(config);
     databaseHandler = new selector(config);
 

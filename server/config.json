@@ -7,11 +7,11 @@
     "metrics_enabled": false,
     "use_one_port": true,
     "redis_port": 6379,
-    "redis_host": "red-d6neb7bh46gs73c9ejig",
+    "redis_host": "red-d6neb7bh46gs73c9ejig.render.com",
     "memcached_host": "127.0.0.1",
     "memcached_port": 11211,
-    "game_servers": [{"server": "localhost", "name": "localhost"}],
-    "server_name" : "localhost",
-    "production": "heroku",
+    "game_servers": [{"server": "classic-browserquest.onrender.com", "name": "Render Server"}],
+    "server_name" : "classic-browserquest.onrender.com",
+    "production": false,
     "database": "redis"
 }
