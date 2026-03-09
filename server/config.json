@@ -1,5 +1,5 @@
 {
-    "port": 8000,
+    "port": 10000,
     "debug_level": "info",
     "nb_players_per_world": 200,
     "nb_worlds": 5,
@@ -7,7 +7,7 @@
     "metrics_enabled": false,
     "use_one_port": true,
     "redis_port": 6379,
-    "redis_host": "red-d6neb7bh46gs73c9ejig.render.com",
+    "redis_host": "red-d6neb7bh46gs73c9ejig",
     "memcached_host": "127.0.0.1",
     "memcached_port": 11211,
     "game_servers": [{"server": "classic-browserquest.onrender.com", "name": "Render Server"}],
