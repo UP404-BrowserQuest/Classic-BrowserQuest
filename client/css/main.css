@@ -331,7 +331,7 @@ footer, header, hgroup, menu, nav, section {
     #death p em {display:block;font-style:normal;}
     
     #legal p {width:75%;font-size:25px;line-height:35px;}
-    #legal p a {color:#2e7fdd;text-decoration:none;}
+    #legal p a {color:#900dd6;text-decoration:none;}
     #close-legal {font-size:20px;margin-top:30px;}
     #toggle-legal, #legal-link a {padding:0 10px;}
     
